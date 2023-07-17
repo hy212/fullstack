@@ -22,7 +22,7 @@ async function handleRequest(req) {
         };
         // if (method.toLowerCase() === 'post') {
             let randomIndex = Math.floor(Math.random() * resposeMsgs.length);
-            rspData.data.chatMsg = resposeMsgs[randomIndex];
+            rspData.data.chatMsg = `[自动回复] ${resposeMsgs[randomIndex]}`;
             return Response(JSON.stringify(rspData), {
                 headers: {
                     // "content-type": "application/json",
