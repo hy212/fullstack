@@ -1,16 +1,14 @@
 <template>
-  <button @click="requestData">请求接口</button>
-  <div>{{responseData}}</div>
+<!--  <button @click="requestData">请求接口</button>-->
+<!--  <div>{{responseData}}</div>-->
   <div class="chatRoom">
     <div class="title">聊天室</div>
-    <div class="chartContent">
-      <div class="item other">
-        <div class="avatar">客服</div>
-        <div class="msg">您好，请问有什么能帮您的吗？</div>
-      </div>
-      <div class="item self">
-        <div class="avatar">我</div>
-        <div class="msg">xxxx</div>
+    <div class="chartContent" ref="chartContent">
+      <div class="item"
+           :class="item.type"
+           v-for="(item, index) in chatList" :key="index">
+        <div class="avatar">{{ item.type === 'other' ? '客服' : '我'}}</div>
+        <div class="msg">{{ item.msg }}</div>
       </div>
     </div>
     <div class="footer">
@@ -30,7 +28,14 @@ export default {
   data() {
     return {
       responseData: '',
-      text: ''
+      text: '',
+      chatList: [
+        {
+          type: 'other',
+          msg: '您好，请问有什么能帮您的吗？',
+          time: new Date().getTime()
+        }
+      ],
     }
   },
   mounted() {
@@ -52,13 +57,32 @@ export default {
       const queryArgs =  {
         msg: this.text,
       }
+      this.chatList.push({
+        time: new Date().getTime(),
+        msg: this.text,
+        type: 'self',
+      });
+      this.text = '';
+      this.scrollToBottom();
       axios.get('/functions/chat', {
         params: queryArgs
       }).then((response)=> {
+        const resData = JSON.parse(response.data).data;
+        this.chatList.push({
+          time: resData.time,
+          msg: resData.chatMsg,
+          type: 'other',
+        });
         console.log('请求成功', response);
+        this.scrollToBottom();
       }).catch(function (error) {
         console.log('请求失败', error);
       });
+    },
+    scrollToBottom() {
+      this.$nextTick(()=> {
+        this.$refs.chartContent.scrollTop =   this.$refs.chartContent.scrollHeight;
+      })
     },
   }
 }
@@ -101,9 +125,8 @@ export default {
   .chatRoom .chartContent{
     padding: 10px;
     background: #f8f8f8;
-    max-height: 60vh;
+    height: 60vh;
     overflow: auto;
-    min-height: 400px;
   }
   .chartContent .item{
     display: flex;
