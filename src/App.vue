@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="footer">
-      <input v-model="text" @keyup.enter="sendData" />
+      <textarea v-model="text" class="input" @keydown="handleKeyCode($event)" ref="input" />
       <button class="sendBtn" @click="sendData">发送</button>
     </div>
   </div>
@@ -84,6 +84,21 @@ export default {
         this.$refs.chartContent.scrollTop =   this.$refs.chartContent.scrollHeight;
       })
     },
+    /** 键盘回车事件: 回车发送，ctrl+enter实现换行 */
+    handleKeyCode(event) {
+      if (event.keyCode === 13) { // 仅回车， 发送消息
+        if (!event.ctrlKey) {
+          event.preventDefault();
+          this.sendData();
+        } else { // 换行
+          console.log('换行');
+          this.text = this.text + '\n';
+          this.$nextTick(()=> {
+            this.$refs.input.scrollTop =   this.$refs.input.scrollHeight;
+          })
+        }
+      }
+    },
   }
 }
 </script>
@@ -153,6 +168,7 @@ export default {
     filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
     word-break: break-all;
     position: relative;
+    white-space: pre-wrap;
   }
   .chartContent .item.other .msg{
     margin-left: 15px;
@@ -190,16 +206,18 @@ export default {
     font-size: 0;
     align-items: center;
   }
-  .footer, .footer input{
+  .footer, .footer .input{
     height: 40px;
   }
-  .footer input{
+  .footer .input{
     width: 90%;
     font-size: 14px;
-    line-height: 40px;
+    /*line-height: 40px;*/
     padding: 10px;
     border: none;
     outline: none;
+    white-space: pre-wrap;
+    resize: none;
     /*height: 100%;*/
   }
   .sendBtn{
@@ -215,5 +233,7 @@ export default {
   .sendBtn:hover{
     background: rgba(1, 82, 218, 0.5);
   }
-
+  .footer .input::-webkit-scrollbar {
+    display: none;
+  }
 </style>
