@@ -13,7 +13,7 @@ async function handleRequest(req) {
 
         return Response(rspData, {
             headers: {
-                "content-type": "text/html;charset=UTF-8",
+                "content-type": "application/json",
             },
         })
     } catch (e) {
