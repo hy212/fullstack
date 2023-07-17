@@ -67,7 +67,7 @@ export default {
       axios.get('/functions/chat', {
         params: queryArgs
       }).then((response)=> {
-        const resData = JSON.parse(response.data).data;
+        const resData = response.data.data;
         this.chatList.push({
           time: resData.time,
           msg: resData.chatMsg,
