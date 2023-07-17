@@ -13,16 +13,21 @@ async function handleRequest(req) {
     try {
 
         const rspData = {
-            time: new Date().getTime(),
-            chatMsg: ''
+            code: 1,
+            msg: '',
+            data: {
+                time: new Date().getTime(),
+                chatMsg: ''
+            }
         };
         // if (method.toLowerCase() === 'post') {
             let randomIndex = Math.floor(Math.random() * resposeMsgs.length);
-            rspData.chatMsg = resposeMsgs[randomIndex];
+            rspData.data.chatMsg = resposeMsgs[randomIndex];
             return Response(JSON.stringify(rspData), {
                 headers: {
                     // "content-type": "application/json",
                     // "content-type" : "multipart/form-data"
+                    "content-type": "text/html;charset=UTF-8",
                 },
             })
         // } else {

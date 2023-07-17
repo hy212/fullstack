@@ -11,9 +11,9 @@ async function handleRequest(req) {
             name: '测试'
         };
 
-        return Response(rspData, {
+        return Response(JSON.stringify(rspData), {
             headers: {
-                "content-type": "application/json",
+                "content-type": "text/html;charset=UTF-8",
             },
         })
     } catch (e) {
