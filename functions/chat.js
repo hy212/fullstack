@@ -19,10 +19,10 @@ async function handleRequest(req) {
         // if (method.toLowerCase() === 'post') {
             let randomIndex = Math.floor(Math.random() * resposeMsgs.length);
             rspData.chatMsg = resposeMsgs[randomIndex];
-            return Response(rspData, {
+            return Response(JSON.stringify(rspData), {
                 headers: {
                     // "content-type": "application/json",
-                    "content-type" : "multipart/form-data"
+                    // "content-type" : "multipart/form-data"
                 },
             })
         // } else {
