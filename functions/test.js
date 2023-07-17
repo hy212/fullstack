@@ -11,7 +11,7 @@ async function handleRequest(req) {
             name: '测试'
         };
 
-        return Response(rspData.join(''), {
+        return Response(rspData, {
             headers: {
                 "content-type": "text/html;charset=UTF-8",
             },
