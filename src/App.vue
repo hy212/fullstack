@@ -20,7 +20,7 @@ export default {
   methods: {
     requestData () {
       axios.get('/functions/test?ID=12345')
-              .then(function (response) {
+              .then((response)=> {
                 console.log('请求成功', response);
                 this.responseData = response;
               })
