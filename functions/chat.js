@@ -16,23 +16,24 @@ async function handleRequest(req) {
             time: new Date().getTime(),
             chatMsg: ''
         };
-        if (method.toLowerCase() === 'post') {
+        // if (method.toLowerCase() === 'post') {
             let randomIndex = Math.floor(Math.random() * resposeMsgs.length);
             rspData.chatMsg = resposeMsgs[randomIndex];
             return Response(rspData, {
                 headers: {
-                    "content-type": "application/json",
+                    // "content-type": "application/json",
+                    "content-type" : "multipart/form-data"
                 },
             })
-        } else {
-            return Response({
-                msg: '只支持post方式'
-            }, {
-                headers: {
-                    "content-type": "text/html;charset=UTF-8",
-                },
-            })
-        }
+        // } else {
+        //     return Response({
+        //         msg: '只支持post方式'
+        //     }, {
+        //         headers: {
+        //             "content-type": "text/html;charset=UTF-8",
+        //         },
+        //     })
+        // }
 
     } catch (e) {
         log("Got Exception: " + e.stack);

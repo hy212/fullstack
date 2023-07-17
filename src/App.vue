@@ -52,7 +52,9 @@ export default {
       const queryArgs =  {
         msg: this.text,
       }
-      axios.post('/functions/chat', queryArgs).then((response)=> {
+      axios.get('/functions/chat', {
+        params: queryArgs
+      }).then((response)=> {
         console.log('请求成功', response);
       }).catch(function (error) {
         console.log('请求失败', error);
