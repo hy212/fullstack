@@ -1,6 +1,4 @@
 <template>
-<!--  <button @click="requestData">请求接口</button>-->
-<!--  <div>{{responseData}}</div>-->
   <div class="chatRoom">
     <div class="title">聊天室</div>
     <div class="chartContent" ref="chartContent">
@@ -38,17 +36,7 @@ export default {
       ],
     }
   },
-  mounted() {
-  },
   methods: {
-    requestData () {
-      axios.get('/functions/test?ID=12345', {}).then((response)=> {
-        console.log('请求成功', response);
-        this.responseData = response;
-      }).catch(function (error) {
-        console.log('请求失败', error);
-      });
-    },
     sendData() {
       if (!this.text.trim()) {
         return;
@@ -81,7 +69,7 @@ export default {
     },
     scrollToBottom() {
       this.$nextTick(()=> {
-        this.$refs.chartContent.scrollTop =   this.$refs.chartContent.scrollHeight;
+        this.$refs.chartContent.scrollTop =  this.$refs.chartContent.scrollHeight;
       })
     },
     /** 键盘回车事件: 回车发送，ctrl+enter实现换行 */
@@ -94,7 +82,7 @@ export default {
           console.log('换行');
           this.text = this.text + '\n';
           this.$nextTick(()=> {
-            this.$refs.input.scrollTop =   this.$refs.input.scrollHeight;
+            this.$refs.input.scrollTop =  this.$refs.input.scrollHeight;
           })
         }
       }
@@ -109,7 +97,6 @@ export default {
     margin: 0;
     box-sizing: border-box;
   }
-  /*****浏览器滚动条样式****/
   ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
@@ -129,7 +116,6 @@ export default {
   }
   .chatRoom{
     width: 800px;
-    /*border: 1px solid #d7d7d7;*/
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
     margin: 10% auto 0;
   }
@@ -164,7 +150,6 @@ export default {
   .chartContent .item .msg{
     padding: 10px;
     border-radius: 4px;
-    /*box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);*/
     filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
     word-break: break-all;
     position: relative;
@@ -181,7 +166,6 @@ export default {
     left: -15px;
     margin-top: -15px;
     border: 8px solid transparent;
-    /*border-right: 15px solid #e0f2ff;*/
     border-right: 8px solid #ffffff;
   }
   .chartContent .item.self{
@@ -198,7 +182,6 @@ export default {
     right: -15px;
     margin-top: -15px;
     border: 8px solid transparent;
-    /*border-right: 15px solid #e0f2ff;*/
     border-left: 8px solid #4ed24e;
   }
   .footer{
@@ -212,13 +195,11 @@ export default {
   .footer .input{
     width: 90%;
     font-size: 14px;
-    /*line-height: 40px;*/
     padding: 10px;
     border: none;
     outline: none;
     white-space: pre-wrap;
     resize: none;
-    /*height: 100%;*/
   }
   .sendBtn{
     background: rgba(1, 82, 218, 0.83);
